@@ -3,6 +3,7 @@ import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
 import { Calendar, X } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { API_URL } from '../config';
 
 interface SuccessModalProps {
   onClose: () => void;
@@ -112,7 +113,7 @@ export function SuccessModal({ onClose }: SuccessModalProps) {
                 </Button>
               </a>
               <a
-                href="http://localhost:5001/api/calendar/ios"
+                href={`${API_URL}/api/calendar/ios`}
                 className="block"
               >
                 <Button

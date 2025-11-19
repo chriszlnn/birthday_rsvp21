@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { PartyDetails } from "./components/PartyDetails";
 import { RsvpForm } from "./components/RsvpForm";
 import { Toaster } from "sonner";
+import { API_URL } from "./config";
 import {
   Accordion,
   AccordionContent,
@@ -24,7 +25,7 @@ export default function App() {
 
   // Fetch RSVPs from API on component mount
   useEffect(() => {
-    fetch("http://localhost:5001/api/rsvp")
+    fetch(`${API_URL}/api/rsvp`)
       .then((res) => res.json())
       .then((data) => {
         // Map backend data to Rsvp interface (convert _id to id)

@@ -9,6 +9,7 @@ import { Upload, ChevronRight, ChevronLeft, X } from "lucide-react";
 import { SuccessModal } from "./SuccessModal";
 import { PropsRain } from "./PropsRain";
 import type { Rsvp } from "../App";
+import { API_URL } from "../config";
 import qrImage from "../assets/qr.jpg";
 
 const PAYMENT_EXEMPT_NAMES = [
@@ -72,7 +73,7 @@ export function RsvpForm({ onSubmit, existingRsvps = [] }: RsvpFormProps) {
     try {
       setIsCheckingName(true);
       const response = await fetch(
-        `http://localhost:5001/api/rsvp/check-name?name=${encodeURIComponent(
+        `${API_URL}/api/rsvp/check-name?name=${encodeURIComponent(
           name.trim()
         )}`
       );
@@ -224,7 +225,7 @@ export function RsvpForm({ onSubmit, existingRsvps = [] }: RsvpFormProps) {
       });
 
       // Send RSVP to backend
-      const response = await fetch("http://localhost:5001/api/rsvp", {
+      const response = await fetch(`${API_URL}/api/rsvp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
