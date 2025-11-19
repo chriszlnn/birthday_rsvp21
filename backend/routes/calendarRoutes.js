@@ -1,6 +1,7 @@
 import express from 'express';
 import { createEvent } from 'ics';
 
+
 const router = express.Router();
 
 // iOS Calendar (.ics file)
@@ -13,7 +14,9 @@ router.get('/ios', (req, res) => {
     location: 'ARTE CHERAS',
     status: 'CONFIRMED',
     busyStatus: 'BUSY',
-    organizer: { name: 'Chrislyn', email: 'chrislynjules@gmail.com' }
+    organizer: { name: 'Chrislyn', email: 'chrislynjules@gmail.com' },
+    startInputType: 'local',
+    endInputType: 'local'
   };
 
   createEvent(event, (error, value) => {
