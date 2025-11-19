@@ -37,8 +37,18 @@ export function SuccessModal({ onClose }: SuccessModalProps) {
     };
     frame();
 
+    // Continuously disable pointer events on confetti canvases but keep them visible on top
+    const disableConfettiClicks = setInterval(() => {
+      const confettiCanvases = document.querySelectorAll('canvas');
+      confettiCanvases.forEach(canvas => {
+        canvas.style.pointerEvents = 'none';
+        canvas.style.zIndex = '10000';
+      });
+    }, 100);
+
     // Cleanup
     return () => {
+      clearInterval(disableConfettiClicks);
       confetti.reset();
     };
   }, []);
@@ -71,16 +81,39 @@ export function SuccessModal({ onClose }: SuccessModalProps) {
       >
         <Button
           type="button"
-          variant="ghost"
           size="icon"
           aria-label="Close success modal"
           onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Close button clicked');
+            onClose();
+          }}
+          onMouseDown={(e) => {
+            e.preventDefault();
             e.stopPropagation();
             onClose();
           }}
-          className="absolute top-4 right-4 text-white transition-all duration-200 hover:bg-white/80 hover:text-purple-700 hover:scale-110 focus-visible:ring-2 focus-visible:ring-white/70"
+          className="absolute top-4 right-4"
+          style={{ 
+            pointerEvents: 'auto',
+            backgroundColor: 'transparent',
+            color: 'white',
+            border: 'none',
+            boxShadow: 'none',
+            zIndex: 10001,
+
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+            e.currentTarget.style.color = 'white';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'transparent';
+            e.currentTarget.style.color = 'white';
+          }}
         >
-          <X className="w-5 h-5" />
+          <X className="w-5 h-5 pointer-events-none" />
         </Button>
 
         <CardContent className="pt-12 pb-8 text-center">
@@ -106,7 +139,20 @@ export function SuccessModal({ onClose }: SuccessModalProps) {
                 className="block"
               >
                 <Button
-                  className="w-full bg-white text-purple-700 hover:bg-purple-50 border-2 border-purple-300 shadow-lg"
+                  variant="outline"
+                  className="w-full bg-purple-700/50 text-white border-2 border-white/30 shadow-lg"
+                  style={{
+                    backgroundColor: 'rgba(126, 34, 206, 0.5)',
+                    color: 'white'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'white';
+                    e.currentTarget.style.color = '#7c3aed';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'rgba(126, 34, 206, 0.5)';
+                    e.currentTarget.style.color = 'white';
+                  }}
                 >
                   <Calendar className="w-5 h-5 mr-2" />
                   Add to Google Calendar
@@ -118,7 +164,19 @@ export function SuccessModal({ onClose }: SuccessModalProps) {
               >
                 <Button
                   variant="outline"
-                  className="w-full bg-purple-700/50 text-white hover:bg-purple-600/50 border-2 border-white/30 shadow-lg"
+                  className="w-full bg-purple-700/50 text-white border-2 border-white/30 shadow-lg"
+                  style={{
+                    backgroundColor: 'rgba(126, 34, 206, 0.5)',
+                    color: 'white'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'white';
+                    e.currentTarget.style.color = '#7c3aed';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'rgba(126, 34, 206, 0.5)';
+                    e.currentTarget.style.color = 'white';
+                  }}
                 >
                   <Calendar className="w-5 h-5 mr-2" />
                   Add to iOS Calendar

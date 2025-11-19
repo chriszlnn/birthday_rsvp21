@@ -63,7 +63,7 @@ export function PartyDetails({ totalAttendees }: PartyDetailsProps) {
                   fontStyle: "normal",
                 }}
               >
-                Friday Night, Novermber 28, 2025
+                Friday Night, November 28, 2025
               </p>
             </div>
           </div>

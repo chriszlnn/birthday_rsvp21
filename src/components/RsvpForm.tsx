@@ -34,6 +34,7 @@ export function RsvpForm({ onSubmit, existingRsvps = [] }: RsvpFormProps) {
   const [receipt, setReceipt] = useState(null as File | null);
   const [receiptPreview, setReceiptPreview] = useState("" as string);
   const [isCheckingName, setIsCheckingName] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const hasTriggeredRain = useRef(false);
   const normalizedName = name.trim().toLowerCase();
   const isPaymentExempt =
@@ -218,6 +219,7 @@ export function RsvpForm({ onSubmit, existingRsvps = [] }: RsvpFormProps) {
     // Convert receipt file to data URL (base64)
     const receiptDataUrl = isPaymentExempt ? "" : receiptPreview; // Already converted in handleFileChange
 
+    setIsSubmitting(true);
     try {
       console.log("Submitting RSVP...", {
         name: name.trim(),
@@ -246,6 +248,7 @@ export function RsvpForm({ onSubmit, existingRsvps = [] }: RsvpFormProps) {
         toast.error(
           `Failed to submit RSVP: ${errorData.message || response.statusText}`
         );
+        setIsSubmitting(false);
         return;
       }
 
@@ -269,6 +272,8 @@ export function RsvpForm({ onSubmit, existingRsvps = [] }: RsvpFormProps) {
           err instanceof Error ? err.message : "Network error"
         }`
       );
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -699,7 +704,8 @@ export function RsvpForm({ onSubmit, existingRsvps = [] }: RsvpFormProps) {
               <Button
                 type="submit"
                 onClick={() => console.log("Submit button clicked!")}
-                className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white  shadow-lg tracking-wide"
+                disabled={isSubmitting}
+                className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white  shadow-lg tracking-wide disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 <p
                   style={{
@@ -708,7 +714,7 @@ export function RsvpForm({ onSubmit, existingRsvps = [] }: RsvpFormProps) {
                     fontStyle: "normal",
                   }}
                 >
-                  SUBMIT RSVP ✨
+                  {isSubmitting ? "SUBMITTING..." : "SUBMIT RSVP ✨"}
                 </p>
               </Button>
             </form>

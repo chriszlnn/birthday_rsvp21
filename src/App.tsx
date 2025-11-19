@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { PartyDetails } from "./components/PartyDetails";
 import { RsvpForm } from "./components/RsvpForm";
+import { CountdownTimer } from "./components/CountdownTimer";
 import { Toaster } from "sonner";
 import { API_URL } from "./config";
 import {
@@ -22,6 +23,7 @@ export interface Rsvp {
 
 export default function App() {
   const [rsvps, setRsvps] = useState([] as Rsvp[]);
+  const [formsClosed, setFormsClosed] = useState(false);
 
   // Fetch RSVPs from API on component mount
   useEffect(() => {
@@ -119,8 +121,14 @@ export default function App() {
           </div>
 
           <div className="mt-8">
-            <RsvpForm onSubmit={handleRsvp} existingRsvps={rsvps} />
+            <CountdownTimer onExpiredChange={setFormsClosed} />
           </div>
+
+          {!formsClosed && (
+            <div className="mt-8">
+              <RsvpForm onSubmit={handleRsvp} existingRsvps={rsvps} />
+            </div>
+          )}
 
           <div className="mt-8">
             <Card
