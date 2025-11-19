@@ -106,13 +106,16 @@ importers:
         version: 8.6.0(react@18.3.1)
       ical-generator:
         specifier: ^10.0.0
-        version: 10.0.0(@types/node@20.19.25)
+        version: 10.0.0(@types/node@20.19.25)(moment-timezone@0.6.0)(moment@2.30.1)
       input-otp:
         specifier: ^1.4.2
         version: 1.4.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       lucide-react:
         specifier: ^0.487.0
         version: 0.487.0(react@18.3.1)
+      moment-timezone:
+        specifier: ^0.6.0
+        version: 0.6.0
       mongodb:
         specifier: ^7.0.0
         version: 7.0.0
@@ -1418,6 +1421,12 @@ packages:
   memory-pager@1.5.0:
     resolution: {integrity: sha512-ZS4Bp4r/Zoeq6+NLJpP+0Zzm0pR8whtGPf1XExKLJBAczGMnSi3It14OiNCStjQjM6NU1okjQGSxgEZN8eBYKg==}
 
+  moment-timezone@0.6.0:
+    resolution: {integrity: sha512-ldA5lRNm3iJCWZcBCab4pnNL3HSZYXVb/3TYr75/1WCTWYuTqYUb5f/S384pncYjJ88lbO8Z4uPDvmoluHJc8Q==}
+
+  moment@2.30.1:
+    resolution: {integrity: sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==}
+
   mongodb-connection-string-url@7.0.0:
     resolution: {integrity: sha512-irhhjRVLE20hbkRl4zpAYLnDMM+zIZnp0IDB9akAFFUZp/3XdOfwwddc7y6cNvF2WCEtfTYRwYbIfYa2kVY0og==}
     engines: {node: '>=20.19.0'}
@@ -2662,9 +2671,11 @@ snapshots:
 
   get-nonce@1.0.1: {}
 
-  ical-generator@10.0.0(@types/node@20.19.25):
+  ical-generator@10.0.0(@types/node@20.19.25)(moment-timezone@0.6.0)(moment@2.30.1):
     optionalDependencies:
       '@types/node': 20.19.25
+      moment: 2.30.1
+      moment-timezone: 0.6.0
 
   input-otp@1.4.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
@@ -2686,6 +2697,12 @@ snapshots:
       react: 18.3.1
 
   memory-pager@1.5.0: {}
+
+  moment-timezone@0.6.0:
+    dependencies:
+      moment: 2.30.1
+
+  moment@2.30.1: {}
 
   mongodb-connection-string-url@7.0.0:
     dependencies:
