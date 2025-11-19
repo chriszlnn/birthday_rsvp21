@@ -7,16 +7,15 @@ const router = express.Router();
 // iOS Calendar (.ics file)
 router.get('/ios', (req, res) => {
   const event = {
-    start: [2025, 11, 28, 20, 0],   // 8:00 PM MYT
-    end:   [2025, 11, 29, 0, 0], 
+    start: [2025, 11, 28, 12, 0], // 12:00 PM UTC
+    end:   [2025, 11, 28, 16, 0], // 12 AM MYT -> 4 PM UTC
     title: "Chrislyn's 21st Birthday - Disco Fever!",
     description: "DRESS CODE: DISCO DRIP OR RETRO FIT✨",
     location: 'ARTE CHERAS',
     status: 'CONFIRMED',
     busyStatus: 'BUSY',
     organizer: { name: 'Chrislyn', email: 'chrislynjules@gmail.com' },
-    startInputType: 'local',
-    endInputType: 'local'
+    
   };
 
   createEvent(event, (error, value) => {
