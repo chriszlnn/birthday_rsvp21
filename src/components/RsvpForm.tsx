@@ -13,9 +13,10 @@ import { API_URL } from "../config";
 import qrImage from "../assets/qr.jpg";
 
 const PAYMENT_EXEMPT_NAMES = [
-  "jon",
-  "memel",
-  "vip guest",
+  "Jon Xavier",
+  "Harith Bennet",
+  "Innocensia Larry Tokuzip",
+  "Jason Wong",
 ];
 
 interface RsvpFormProps {
